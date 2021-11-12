@@ -13,6 +13,6 @@ class TestFunc < MiniTest::Test
 
   def test_part
     res = MathFunctions.execute(0.5, eps)
-    assert_in_delta res[0], Math.atan(@para), eps
+    assert_in_delta res[0], Math.atan(para), eps
   end
 end
