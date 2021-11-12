@@ -2,15 +2,17 @@
 
 # Calculating deriative of three adjacent numbers
 class Derivative
-  Result = Struct.new(:dy0, :dy1, :dy2)
+  attr_accessor :x0_val, :x1_val, :x2_val
 
-  def differ(x0_val, x1_val, x2_val, lambda = nil, &block)
+  def initialize(x0_val, x1_val, x2_val, &block)
+    @x0_val = x0_val
+    @x1_val = x1_val
+    @x2_val = x2_val
+  end
+
+  def differ
     arr_x = [x0_val, x1_val, x2_val]
-    y = if lambda.nil?
-          arr_x.map { |x| block.call x }
-        else
-          arr_x.map { |x| lambda.call x }
-        end
+    y = arr_x.map { |x| yield x }
     cal_dy(y[0], y[1], y[2], x1_val - x0_val)
   end
 
@@ -18,7 +20,7 @@ class Derivative
     dy0 = cal_d1(yy0, yy1, yy2, step)
     dy1 = cal_d2(yy0, yy2, step)
     dy2 = cal_d3(yy0, yy1, yy2, step)
-    Result.new dy0, dy1, dy2
+    [dy0, dy1, dy2]
   end
 
   def cal_d1(yy0, yy1, yy2, step)
