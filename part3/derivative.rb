@@ -4,7 +4,7 @@
 class Derivative
   attr_accessor :x0_val, :x1_val, :x2_val
 
-  def initialize(x0_val, x1_val, x2_val, &block)
+  def initialize(x0_val, x1_val, x2_val)
     @x0_val = x0_val
     @x1_val = x1_val
     @x2_val = x2_val
